@@ -19,8 +19,53 @@
         <a href="sobre.html" class="w3-bar-item w3-button w3-mobile w3-right">Sobre o Site</a>
         <a href="noticias.html" class="w3-bar-item w3-button w3-mobile w3-right">Notícias</a>
     </div>
-    <h2>Pessoa adicionada com sucesso!</h2>
+    <main class="container">
 
+        <h2>Formulário para adicionar pessoa:</h2>
+        <form action="selecionadosComSucesso.html">
+            <div class="grid">
+
+                <label for="nome">Seu nomezinho*:
+                    <input type="text" id="nome" name="nome" placeholder=" nome" required>
+                </label>
+
+                <label for="email">e-Mail*:
+                    <input type="email" id="email" name="email" placeholder="email" required>
+                    <small>Nunca divulgaremos :)</small>
+                </label>
+
+                <label for="data">Data de Nascimento*:
+                    <input type="date" id="data" name="data" placeholder="data" required>
+                </label>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Genero*:</legend>
+                    <label for="masculino">
+                        <input type="radio" id="masculino" name="genero" value="masculino" checked>
+                        Masculino
+                    </label>
+                    <label for="feminino">
+                        <input type="radio" id="feminino" name="genero" value="feminino">
+                        Feminino
+                    </label>
+                    <label for="nenhum">
+                        <input type="radio" id="nenhum" name="genero" value="nenhum">
+                        Não informado
+                    </label>
+                </fieldset>
+            </div>
+            <br>
+            <div class="grid">
+                <button type="submit">Adicionar!</button>
+                <button type="reset">Limpar</button>
+            </div>
+            <br>
+            <small>Campo obrigatório*</small>
+
+
+        </form>
+    </main>
 </body>
 
 </html>
