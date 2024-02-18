@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="assets/fav_icon.ico" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/pico.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/w3.css}">
+    <meta codigoSecreto="2752647763715050000">
+
+    <title>Home</title>
+</head>
+
+<body>
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        img {
+            width: 400px;
+        }
+    </style>
+    <div th:insert="~{components/navegador :: nav}"></div>
+
+</body>
+<main>
+    <h1>Hidrate-se</h1>
+    <img src="assets/agua.jpg" alt="" srcset="">
+</main>
+
+</html>

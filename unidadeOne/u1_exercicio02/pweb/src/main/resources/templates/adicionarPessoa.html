@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="assets/fav_icon.ico" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/pico.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/w3.css}">
+    <meta codigoSecreto="2752647763715050000">
+
+    <title>Formulário de Pessoas</title>
+</head>
+
+<body> 
+    <div th:insert="~{components/navegador :: nav}"></div>
+
+    <main class="container">
+
+        <h2>Formulário para adicionar pessoa:</h2>
+        <form action="adicionadoComSucesso.html">
+            <div class="grid">
+
+                <label for="nome">Seu nomezinho*:
+                    <input type="text" id="nome" name="nome" placeholder=" nome" required>
+                </label>
+
+                <label for="email">e-Mail*:
+                    <input type="email" id="email" name="email" placeholder="email" required>
+                    <small>Nunca divulgaremos :)</small>
+                </label>
+
+                <label for="data">Data de Nascimento*:
+                    <input type="date" id="data" name="data" placeholder="data" required>
+                </label>
+            </div>
+            <div>
+                <fieldset style="border: 0px;">
+                    <legend>Genero*:</legend>
+                    <label for="masculino">
+                        <input type="radio" id="masculino" name="genero" value="masculino" checked>
+                        Masculino
+                    </label>
+                    <label for="feminino">
+                        <input type="radio" id="feminino" name="genero" value="feminino">
+                        Feminino
+                    </label>
+                    <label for="nenhum">
+                        <input type="radio" id="nenhum" name="genero" value="nenhum">
+                        Não informado
+                    </label>
+                </fieldset>
+            </div>
+            <br>
+            <div class="grid">
+                <button type="submit">Adicionar!</button>
+                <button type="reset">Limpar</button>
+            </div>
+            <br>
+            <small>* Campo obrigatório</small>
+
+
+        </form>
+    </main>
+</body>
+
+</html>
