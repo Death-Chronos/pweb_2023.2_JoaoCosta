@@ -18,35 +18,35 @@
     <main class="container">
 
         <h2>Formulário para adicionar pessoa:</h2>
-        <form action="adicionadoComSucesso.html">
+        <form th:action="@{/salvar}" th:object="${pessoa}" method="post">
             <div class="grid">
 
                 <label for="nome">Seu nomezinho*:
-                    <input type="text" id="nome" name="nome" placeholder=" nome" required>
+                    <input type="text" id="nome" name="nome" placeholder=" nome" required th:field="*{nome}">
                 </label>
 
                 <label for="email">e-Mail*:
-                    <input type="email" id="email" name="email" placeholder="email" required>
+                    <input type="email" id="email" name="email" placeholder="email" required th:field="*{email}">
                     <small>Nunca divulgaremos :)</small>
                 </label>
 
                 <label for="data">Data de Nascimento*:
-                    <input type="date" id="data" name="data" placeholder="data" required>
+                    <input type="date" id="data" name="data" placeholder="data" required th:field="*{data_nascimento}">
                 </label>
             </div>
             <div>
                 <fieldset style="border: 0px;">
                     <legend>Genero*:</legend>
                     <label for="masculino">
-                        <input type="radio" id="masculino" name="genero" value="masculino" checked>
+                        <input type="radio" id="masculino" name="genero" value="masculino" checked th:checked="${genero == 'Masculino'}">
                         Masculino
                     </label>
                     <label for="feminino">
-                        <input type="radio" id="feminino" name="genero" value="feminino">
+                        <input type="radio" id="feminino" name="genero" value="feminino" th:checked="${genero == 'Feminino'}">
                         Feminino
                     </label>
                     <label for="nenhum">
-                        <input type="radio" id="nenhum" name="genero" value="nenhum">
+                        <input type="radio" id="nenhum" name="genero" value="nenhum" th:checked="${genero == 'Nao informado'}">
                         Não informado
                     </label>
                 </fieldset>

@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="assets/fav_icon.ico" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/pico.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" hth:href="@{/css/w3.css}">
+    <link rel="stylesheet" th:href="@{/css/w3.css}">
     <meta codigoSecreto="2752647763715050000">
 
     <title>Edição de Pessoas</title>
@@ -19,46 +19,49 @@
     <main class="container">
 
         <h2>Formulário para editar pessoa:</h2>
-        <form action="selecionadosComSucesso.html">
+        <form th:action="@{/salvar/{id}(id={pessoa.id})}" th:object="${pessoa}" method="post">
             <div class="grid">
 
-                <label for="nome">Seu nomezinho*:
-                    <input type="text" id="nome" name="nome" placeholder=" nome" required>
-                </label>
+                <div class="grid">
 
-                <label for="email">e-Mail*:
-                    <input type="email" id="email" name="email" placeholder="email" required>
-                    <small>Nunca divulgaremos :)</small>
-                </label>
-
-                <label for="data">Data de Nascimento*:
-                    <input type="date" id="data" name="data" placeholder="data" required>
-                </label>
-            </div>
-            <div>
-                <fieldset style="border: 0px;">
-                    <legend>Genero*:</legend>
-                    <label for="masculino">
-                        <input type="radio" id="masculino" name="genero" value="masculino" checked>
-                        Masculino
+                    <label for="nome">Seu nomezinho*:
+                        <input type="text" id="nome" name="nome" placeholder=" nome" required th:field="*{nome}" th:value="${pessoa.nome}">
                     </label>
-                    <label for="feminino">
-                        <input type="radio" id="feminino" name="genero" value="feminino">
-                        Feminino
+    
+                    <label for="email">e-Mail*:
+                        <input type="email" id="email" name="email" placeholder="email" required th:field="*{email}" th:value="${pessoa.email}">
+                        <small>Nunca divulgaremos :)</small>
                     </label>
-                    <label for="nenhum">
-                        <input type="radio" id="nenhum" name="genero" value="nenhum">
-                        Não informado
+    
+                    <label for="data">Data de Nascimento*:
+                        <input type="date" id="data" name="data" placeholder="data" required th:field="*{data_nascimento}" th:value="${pessoa.data_nascimento}">
                     </label>
-                </fieldset>
-            </div>
-            <br>
-            <div class="grid">
-                <button type="submit">Adicionar!</button>
-                <button type="reset">Limpar</button>
-            </div>
-            <br>
-            <small>* Campo obrigatório</small>
+                </div>
+                <div>
+                    <fieldset style="border: 0px;">
+                        <legend>Genero*:</legend>
+                        <label for="masculino">
+                            <input type="radio" id="masculino" name="genero" value="masculino" checked th:checked="${genero == 'Masculino'}">
+                            Masculino
+                        </label>
+                        <label for="feminino">
+                            <input type="radio" id="feminino" name="genero" value="feminino" th:checked="${genero == 'Feminino'}">
+                            Feminino
+                        </label>
+                        <label for="nenhum">
+                            <input type="radio" id="nenhum" name="genero" value="nenhum" th:checked="${genero == 'Nao informado'}">
+                            Não informado
+                        </label>
+                    </fieldset>
+                </div>
+                <br>
+                <div class="grid">
+                    <button type="submit">Adicionar!</button>
+                    <button type="reset">Limpar</button>
+                </div>
+                <br>
+                <small>* Campo obrigatório</small>
+    
 
 
         </form>
