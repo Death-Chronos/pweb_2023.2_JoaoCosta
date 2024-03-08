@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Lista de Clientes</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+
+    <main class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Genero</th>
+                    <th>Endereço</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.id}">01</td>
+                    <td th:text="${cliente.nome}">cliente</td>
+                    <td th:text="${cliente.genero}">Masculino</td>
+                    <td
+                        th:text="|${cliente.endereco.bairro}, Rua ${cliente.endereco.rua}, Nº${cliente.endereco.numero}  ${cliente.endereco.cidade}|">
+                        Rua Vereador Marcelino</td>
+                    <td th:text="${cliente.email}">cliente@gmail.com</td>
+                    <td th:text="${cliente.telefone}">8499123123</td>
+                    <td><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}">editar</a></td>
+                    <td><a th:href="@{/clientes/deletar/{id}(id=${cliente.id})}">deletar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+
+</html>

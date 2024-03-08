@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <nav th:fragment="nav" name="Logo" id="logo">
+        <div class="nav-wrapper blue lighten-2">
+            <a href="/" class="brand-logo" id="nomeL">Maria's Roupas</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li id="menu"><a href="/clientes">Home</a></li>
+                <li id="menu"><a href="/clientes/form">Cadastro de Clientes</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+
+</html>
