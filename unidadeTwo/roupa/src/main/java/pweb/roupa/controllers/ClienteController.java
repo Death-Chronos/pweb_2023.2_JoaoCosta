@@ -14,6 +14,8 @@ import pweb.roupa.entities.Cliente;
 import pweb.roupa.entities.composicao.Endereco;
 import pweb.roupa.entities.enums.Genero;
 import pweb.roupa.services.ClienteService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -52,10 +54,17 @@ public class ClienteController {
         return "redirect:/clientes";
     }
 
+    @GetMapping("/editar/{id}")
+    public ModelAndView editarCliente(@PathVariable Long id ){
+        ModelAndView mv = new ModelAndView("edicaoCliente");
+        mv.addObject("cliente", cs.findbyId(id));
+        return mv;
+    }
+    
+
     @PostMapping("/atualizar/{id}")
     public String atualizarCliente(Cliente cliente,@PathVariable Long id) {
         cs.update(cliente, id);
-        
         return "redirect:/clientes";
     }
 
