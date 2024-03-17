@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/materialize.css}">
-    <script th:src="@{/js/materialize}"></script>
+    <script th:src="@{/js/materialize.js}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Lista de Clientes</title>
 </head>
@@ -23,8 +23,7 @@
                     <th>Endereço</th>
                     <th>Email</th>
                     <th>Telefone</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
 
@@ -38,8 +37,8 @@
                         Rua Vereador Marcelino</td>
                     <td th:text="${cliente.email}">cliente@gmail.com</td>
                     <td th:text="${cliente.telefone}">8499123123</td>
-                    <td><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}">editar</a></td>
-                    <td><a th:href="@{/clientes/deletar/{id}(id=${cliente.id})}">deletar</a></td>
+                    <td><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn-small blue darken-1">editar</a></td>
+                    <td><a th:href="@{/clientes/deletar/{id}(id=${cliente.id})}" class="btn-small red darken-1">deletar</a></td>
                 </tr>
             </tbody>
         </table>

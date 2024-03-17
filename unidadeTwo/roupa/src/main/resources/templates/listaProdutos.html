@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Lista de Clientes</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+
+    <main class="container">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Marca</th>
+                    <th>Tipo de Tecido</th>
+                    <th>Preço de Compra</th>
+                    <th>Preço de Venda</th>
+                    <th>Data de Cadastro</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.id}">Código do Produto</td>
+                    <td th:text="${produto.nome}">Nome do Produto</td>
+                    <td th:text="${produto.marca}">Marca do Produto</td>
+                    <td th:text="${#strings.capitalize(produto.tipoTecido.toString().toLowerCase())}">
+                        Tipo de Tecido
+                    </td>
+                    <td th:text="${produto.precoCompra}">Preço de Compra</td>
+                    <td th:text="${produto.precoVenda}">Preço de Venda</td>
+                    <td th:text="${#temporals.format(produto.dataCadastro, 'dd/MM/yyyy HH:mm:ss')}">Data de Cadastro</td>
+                    <td>
+                        <a th:href="@{/produtos/editar/{id}(id=${produto.id})}" class="btn-small blue darken-1">Editar</a>
+                        <a th:href="@{/produtos/deletar/{id}(id=${produto.id})}" class="btn-small red darken-1">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </main>
+
+</body>
+
+</html>

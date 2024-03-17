@@ -14,7 +14,6 @@ import pweb.roupa.entities.Cliente;
 import pweb.roupa.entities.composicao.Endereco;
 import pweb.roupa.entities.enums.Genero;
 import pweb.roupa.services.ClienteService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
