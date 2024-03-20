@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Lista de Dependentes</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegadorDependentes :: nav}"></div>
+
+    <main class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Genero</th>
+                    <th>Data de Nascimento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="dependente : ${dependentes}">
+                    <td th:text="${dependente.id}">01</td>
+                    <td th:text="${dependente.nome}">nome</td>
+                    <td th:text="${dependente.genero}">Masculino</td>
+                    <td th:text="${dependente.data_nascimento}">20/12/2003</td>
+                    <td><a th:href="@{/clientes/dependente/editar/{id}(id=${dependente.id})}" class="btn-small blue darken-1">editar</a></td>
+                    <td><a th:href="@{/clientes/dependente/deletar/{id}(id=${dependente.id})}" class="btn-small red darken-1">deletar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+
+</html>

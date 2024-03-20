@@ -11,11 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pweb.roupa.dtos.ClienteDTO;
 import pweb.roupa.entities.Cliente;
+import pweb.roupa.entities.Dependente;
 import pweb.roupa.entities.composicao.Endereco;
 import pweb.roupa.entities.enums.Genero;
 import pweb.roupa.services.ClienteService;
-
-
+import pweb.roupa.services.DependenteService;
 
 
 @Controller
@@ -24,6 +24,9 @@ public class ClienteController {
 
     @Autowired
     ClienteService cs;
+
+    @Autowired
+    DependenteService ds;
 
     @GetMapping("")
     public ModelAndView listarClientes() {
@@ -36,13 +39,11 @@ public class ClienteController {
         cliente.setEndereco(new Endereco());
         ModelAndView mv = new ModelAndView("formCliente");
         mv.addObject("cliente", cliente);
-        mv.addObject("generos",Genero.values());
-
+        mv.addObject("generos", Genero.values());
 
         return mv;
     }
-    
-    
+
     @PostMapping("/salvar")
     public String salvarCliente(ClienteDTO dto) {
         System.out.println(dto.email());
@@ -54,15 +55,14 @@ public class ClienteController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editarCliente(@PathVariable Long id ){
+    public ModelAndView editarCliente(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("edicaoCliente");
-        mv.addObject("cliente", cs.findbyId(id));
+        mv.addObject("cliente", cs.findById(id));
         return mv;
     }
-    
 
     @PostMapping("/atualizar/{id}")
-    public String atualizarCliente(Cliente cliente,@PathVariable Long id) {
+    public String atualizarCliente(Cliente cliente, @PathVariable Long id) {
         cs.update(cliente, id);
         return "redirect:/clientes";
     }
@@ -71,8 +71,61 @@ public class ClienteController {
     public String deletarCliente(@PathVariable Long id) {
         cs.delete(id);
         return "redirect:/clientes";
-        
+
+    }
+    @GetMapping("/{id}/dependentes")
+    public ModelAndView listaDependentes(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("listaDependentes");
+
+        mv.addObject("dependentes", cs.findById(id).getDependentes());
+        mv.addObject("idCliente", id);
+
+        return mv;
+    }
+
+    @GetMapping("/{id}/dependenteForm")
+    public ModelAndView dependenteForm(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("formDependente");
+
+        Dependente dp = new Dependente();
+        dp.setCliente(cs.findById(id));
+        System.out.println(dp.getCliente().getNome());
+
+        mv.addObject("dependente", dp);
+        mv.addObject("generos", Genero.values());
+
+        return mv;
+    }
+
+
+    @PostMapping("/{id}/dependente/salvar")
+    public String salvarDependente(Dependente dp, @PathVariable Long id) {
+        cs.salvarDependente(dp, id);
+        return "redirect:/clientes/"+id+"/dependentes";
+    }
+
+    @GetMapping("/dependente/deletar/{id}")
+    public String deletarDependente(@PathVariable Long id) {
+        cs.deletarDependente(id);
+        return "redirect:/clientes";
+    }
+
+    @GetMapping("/dependente/editar/{id}")
+    public ModelAndView editarDependente (@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("edicaoDependente");
+        mv.addObject("dependente", cs.findDependenteById(id));
+        mv.addObject("generos", Genero.values());
+        return mv;
+    }
+
+    @PostMapping("/dependente/{id}/atualizar")
+    public String atualizarDependente(@PathVariable Long id, Dependente dp) {
+        System.out.println(id);
+         Long idCliente =cs.atualizarDependente(id, dp);
+
+        return "redirect:/clientes/"+idCliente+"/dependentes";
     }
     
     
+
 }

@@ -5,10 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import pweb.roupa.controllers.exceptions.ResourceNotFoundException;
 import pweb.roupa.entities.Cliente;
+import pweb.roupa.entities.Dependente;
 import pweb.roupa.repositories.ClienteRepository;
+import pweb.roupa.repositories.DependenteRepository;
 
 @Service
 public class ClienteService {
@@ -16,11 +19,14 @@ public class ClienteService {
     @Autowired
     ClienteRepository cr;
 
+    @Autowired
+    DependenteRepository dr;
+
     public List<Cliente> findAll() {
         return cr.findAll();
     }
 
-    public Cliente findbyId(Long id) {
+    public Cliente findById(Long id) {
         Optional<Cliente> optional = cr.findById(id);
         return optional.orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado com o id:" + id));
     }
@@ -46,6 +52,45 @@ public class ClienteService {
             throw new ResourceNotFoundException("Cliente não encontrado com o id:" + id);
         }
 
+    }
+
+    public Dependente findDependenteById(Long id) {
+        return dr.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Dependente não encontrado com o id:" + id));
+    }
+
+    public boolean existsById(Long id) {
+        return dr.existsById(id);
+    }
+
+    public void salvarDependente(Dependente dp, Long id) {
+        Cliente cliente = findById(id);
+        dp.setCliente(cliente);
+        cliente.addDependente(dp);
+        save(cliente);
+    }
+
+    public void deletarDependente(Long id) {
+        Dependente dp = dr.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Dependente não encontrado com o id:" + id));
+        ;
+        Cliente cliente = dp.getCliente();
+        cliente.removeDependente(dp);
+        save(cliente);
+        ;
+    }
+
+    public Long atualizarDependente(Long id, Dependente dp) {
+        if(existsById(id)){
+            System.out.println(findDependenteById(id).getId());
+            Cliente cliente = findById(findDependenteById(id).getId());
+            cliente.removeDependenteById(id);
+            cliente.addDependente(dp);
+            cr.save(cliente);
+            return cliente.getId();
+        }else{
+            throw new ResourceNotFoundException("Dependente não encontrado com o id:" + id);
+        }
     }
 
 }

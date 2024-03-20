@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Edicao de Dependentes</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegadorDependentes :: nav}"></div>
+
+    <main class="container">
+        <h3>Cadastro de Cliente</h3>
+        <form th:action="@{/clientes/dependente/{id}/atualizar(id=${dependente.id})}" method="post" th:object="${dependente}">
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="input-field col s6">
+                        <input type="text" id="nome" name="nome" th:field="*{nome}" required>
+                        <label for="nome">Nome</label>
+                    </div>
+                    <div class="input-field col s6" style="margin-top: 10px;">
+                        <label> Genero:
+                            <label th:each="genero : ${generos}" th:switch="${genero}">
+                                <input type="radio" th:field="*{genero}" th:value="${genero}" />
+                                <span th:case="${T(pweb.roupa.entities.enums.Genero).MASCULINO}">Masculino</span>
+                                <span th:case="${T(pweb.roupa.entities.enums.Genero).FEMININO}">Feminino</span>
+                                <span th:case="${T(pweb.roupa.entities.enums.Genero).NAOINFORMADO}">Não Informado</span>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="date" id="data_nascimento" name="data_nascimento" th:field="*{data_nascimento}" required>
+                    <label for="data_nascimento">Data de Nascimento</label>
+                </div>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Salvar</button>
+                    <button class="btn waves-effect waves-light" type="reset" name="action">Limpar</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>
