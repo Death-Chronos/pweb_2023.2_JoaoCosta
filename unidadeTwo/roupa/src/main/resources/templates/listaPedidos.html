@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Lista de Clientes</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+
+    <main class="container">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Cliente</th>
+                    <th>Data de Criação</th>
+                    <th>Produtos</th>
+                    <th>Valor Total</th>
+                    <th>Método de Pagamento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.id}">Código do Pedido</td>
+                    <td th:text="${pedido.cliente.nome}">Nome do Cliente</td>
+                    <td th:text="${pedido.data_criacao}">Marca do Produto</td>
+                    <td>
+                        <ul th:each="item : ${pedido.itens}">
+                            <li th:text="'Nome: ' + ${item.id.produto.nome} + ', Preço: ' + ${item.preco}"></li>
+                        </ul>
+                        
+                    </td>
+                    <td th:text="${pedido.getTotal()}">Preço Total</td>
+                    <td th:text="${pedido.pagamento.metodoPagamento}">Método de Pagamento</td>
+                    </td>
+                    <td>
+                        <a th:href="@{/pedidos/editar/{id}(id=${pedido.id})}"
+                            class="btn-small blue darken-1">Editar</a>
+                        <a th:href="@{/pedidos/deletar/{id}(id=${pedido.id})}"
+                            class="btn-small red darken-1">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+
+</body>
+
+</html>

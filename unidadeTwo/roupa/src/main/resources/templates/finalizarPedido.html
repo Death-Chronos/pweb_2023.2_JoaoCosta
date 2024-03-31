@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Form Produtos</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+    <main class="container" style="padding-top: 20px;">
+        <form th:action="@{/pedidos/finalizar}" method="post" th:object="${pedido}">
+            <input type="hidden" name="" th:field="*{id}">
+            <input type="hidden" name="" th:field="*{cliente.id}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item, itemStat : ${pedido.itens}">
+                        <td th:text="${item.id.produto.nome}"></td>
+                        <td>
+                            <input type="hidden" th:field="*{itens[__${itemStat.index}__].id.produto}">
+                            <input type="hidden" th:field="*{itens[__${itemStat.index}__].id.pedido}">
+                        </td>
+                        <td>
+                            <input type="number" th:field="*{itens[__${itemStat.index}__].quantidade}" min="1"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input list="metodosPagamento" id="metodoPagamento" name="metodoPagamento" th:field="*{pagamento.metodoPagamento}" required>
+            <datalist id="metodosPagamento">
+                <option th:each="metodo : ${metodosPagamento}" th:value="${metodo}"
+                    th:text="${#strings.capitalize(#strings.toLowerCase(metodo.name()))}">
+                </option>
+            </datalist>
+            <label for="metodosPagamento">Tipo de Pagamento</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button type="submit" class="btn waves-effect waves-light">Finalizar Pedido</button>
+                </div>
+            </div>
+        </form>
+        
+
+    </main>
+
+</body>
+
+</html>

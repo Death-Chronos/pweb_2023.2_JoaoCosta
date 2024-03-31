@@ -40,6 +40,7 @@
                     <td><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn-small blue darken-1">editar</a></td>
                     <td><a th:href="@{/clientes/deletar/{id}(id=${cliente.id})}" class="btn-small red darken-1">deletar</a></td>
                     <td><a th:href="@{/clientes/{id}/dependentes(id=${cliente.id})}" class="btn-small grey darken-3">dependentes</a></td>
+                    <td><a th:href="@{/pedidos/escolherCliente/{id}(id=${cliente.id})}" class="btn-small green darken-4">realizarPedido</a></td>
                 </tr>
             </tbody>
         </table>

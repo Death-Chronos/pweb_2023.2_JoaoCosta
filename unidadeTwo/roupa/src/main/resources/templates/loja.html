@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Loja</title>
+
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+
+    <main class="container">
+
+       <form th:action="@{/pedidos/{id}/adicionarProdutos(id=${idPedido})}" method="post">
+            <h2>Selecione os produtos:</h2>
+            <div th:each="produto : ${produtos}">
+                <label>
+                    <input type="checkbox" th:id="'produto_' + ${produto.id}" th:name="idsProdutos"
+                        th:value="${produto.id}" />
+                    <span th:text="${produto.nome}"></span>
+                    <span> - </span>
+                    <span>Marca: </span><span th:text="${produto.marca}"></span> 
+                    <span> - </span>
+                    <span>Preço: R$</span><span th:text="${produto.precoVenda}"></span>
+                    <span> - </span>
+                    <span>Tipo de Tecido: </span><span th:text="${produto.tipoTecido}"></span>
+                </label>
+            </div>
+            <button type="submit" class="btn waves-effect waves-light">Enviar
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+       
+    </main>
+
+</body>
+
+</html>

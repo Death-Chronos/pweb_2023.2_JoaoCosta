@@ -27,5 +27,29 @@ public class PedidoProduto {
     public double getSubtotal() {
         return preco * quantidade;
     }
+
+    public PedidoProduto(Produto produto, Pedido pedido, Double preco) {
+        id.setPedido(pedido);
+        id.setProduto(produto);
+        this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        return "PedidoProduto [quantidade=" + quantidade + ", preco=" + preco + "]";
+    }
+
+    public PedidoProduto(Produto produto, Pedido pedido, Double preco, int quantidade) {
+        id.setPedido(pedido);
+        id.setProduto(produto);
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }
+
+    public void setProduto(Produto produto) {
+        this.id.setProduto(produto);
+    }
+
+    
     
 }

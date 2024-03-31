@@ -49,7 +49,7 @@ public ModelAndView formProduto() {
     @GetMapping("/editar/{id}")
     public ModelAndView editarProduto(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("edicaoProduto");
-        mv.addObject("produto", ps.findbyId(id));
+        mv.addObject("produto", ps.findById(id));
         mv.addObject("tecidos", Tecido.values());
 
         return mv;

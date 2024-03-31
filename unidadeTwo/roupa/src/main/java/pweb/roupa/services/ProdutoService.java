@@ -21,7 +21,7 @@ public class ProdutoService {
         return pr.findAll();
     }
 
-    public Produto findbyId(Long id) {
+    public Produto findById(Long id) {
         Optional<Produto> optional = pr.findById(id);
         return optional.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com o id:" + id));
     }

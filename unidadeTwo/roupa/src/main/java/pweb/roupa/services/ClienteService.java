@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import pweb.roupa.controllers.exceptions.ResourceNotFoundException;
 import pweb.roupa.entities.Cliente;
@@ -59,8 +58,12 @@ public class ClienteService {
                 .orElseThrow(() -> new ResourceNotFoundException("Dependente não encontrado com o id:" + id));
     }
 
-    public boolean existsById(Long id) {
+    public boolean dependenteExistsById(Long id) {
         return dr.existsById(id);
+    }
+
+    public boolean existsById(Long id) {
+        return cr.existsById(id);
     }
 
     public void salvarDependente(Dependente dp, Long id) {
@@ -81,7 +84,7 @@ public class ClienteService {
     }
 
     public Long atualizarDependente(Long id, Dependente dp) {
-        if(existsById(id)){
+        if(dependenteExistsById(id)){
             System.out.println(findDependenteById(id).getId());
             Cliente cliente = findById(findDependenteById(id).getId());
             cliente.removeDependenteById(id);
