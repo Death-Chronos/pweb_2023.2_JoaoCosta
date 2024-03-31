@@ -3,3 +3,7 @@
 ## Conteudos Abordados
 * HTML
 * CSS
+* JAVA
+* SPRING BOOT
+* SPRING JPA
+* THYMELEAF
