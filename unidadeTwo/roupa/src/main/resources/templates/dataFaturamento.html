@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Formulário para Faturamento</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+    <main class="container">
+        <h3>Informe a Data</h3>
+        <form th:action="@{/faturamento/relatorio}" method="get">
+            <div class="input-field">
+                <input type="date" id="data" name="data" required>
+                <label for="data">Data</label>
+            </div>
+            <button type="submit" class="btn waves-effect waves-light">Consultar</button>
+        </form>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/materialize.css}">
+    <script th:src="@{/js/materialize.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Relatório de Faturamento</title>
+</head>
+
+<body>
+    <div th:insert="~{componentes/navegador :: nav}"></div>
+    <main class="container">
+        <h3>Faturamento dos Últimos 12 Meses</h3>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Mês</th>
+                    <th>Faturamento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="mes, idx : ${faturamentoMensal}">
+                    <td th:text="${idx.index + 1}"></td>
+                    <td th:text="'R$ '+${#numbers.formatDecimal(mes.value, 1,2 , 'COMMA')}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Resumo</h3>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Faturamento Total da Loja</td>
+                    <td th:text="'R$ '+${#numbers.formatDecimal(faturamentoTotal, 1, 2, 'COMMA')}"></td>
+                </tr>
+                <tr>
+                    <td>Imposto Total Pago</td>
+                    <td th:text="'R$ '+${#numbers.formatDecimal(impostoTotal, 1, 2,'COMMA')}"></td>
+                </tr>
+                <tr>
+                    <td>Soma dos Valores (Faturamento + Imposto)</td>
+                    <td th:text="'R$ '+${#numbers.formatDecimal(total, 1, 2, 'COMMA')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>
