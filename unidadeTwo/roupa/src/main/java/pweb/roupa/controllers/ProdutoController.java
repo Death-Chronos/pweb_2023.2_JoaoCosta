@@ -1,5 +1,8 @@
 package pweb.roupa.controllers;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import pweb.roupa.dtos.ProdutoDTO;
 import pweb.roupa.entities.Produto;
 import pweb.roupa.entities.enums.Tecido;
 import pweb.roupa.services.ProdutoService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/produtos")
@@ -67,5 +72,17 @@ public ModelAndView formProduto() {
         return "redirect:/produtos";
 
     }
+
+    @GetMapping("/buscar")
+    public ModelAndView buscarPorNome(@RequestParam String nome) {
+        try {
+            nome = URLDecoder.decode(nome, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        ModelAndView mv = new ModelAndView("listaProdutos","produtos",ps.buscarProdutosPorNome(nome));
+        return mv ;
+    }
+    
 
 }

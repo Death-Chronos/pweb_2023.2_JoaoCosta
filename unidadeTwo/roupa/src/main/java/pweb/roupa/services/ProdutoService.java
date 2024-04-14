@@ -50,4 +50,10 @@ public class ProdutoService {
 
     }
 
+    public List<Produto> buscarProdutosPorNome(String nome){
+        List<Produto> list = pr.buscarPorNome(nome);
+        
+        return list;
+    }
+
 }

@@ -14,6 +14,19 @@
     <div th:insert="~{componentes/navegador :: nav}"></div>
 
     <main class="container">
+
+        <form action="/produtos/buscar" method="get" class="col s12">
+            <h3>Pesquisar Produto</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" id="nome" name="nome" required>
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Buscar</button>
+                    <button class="btn waves-effect waves-light" type="reset" name="action">Limpar</button>
+                </div>
+        </form>
         <table class="striped">
             <thead>
                 <tr>
